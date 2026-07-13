@@ -10,6 +10,7 @@ const useTodoStore = create((set) => ({
           id: Date.now(),
           title: item.title,
           description: item.description,
+          createdAt: new Date().toLocaleString("pt-BR"),
           completed: false,
         },
       ],
