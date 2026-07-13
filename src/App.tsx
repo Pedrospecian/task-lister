@@ -28,6 +28,7 @@ function App() {
   const todos = useTodoStore((state) => state.todos);
   const modalIsOpen = useModalStore((state) => state.modalIsOpen);
   const modalToggle = useModalStore((state) => state.modalToggle);
+  const modalReset = useModalStore((state) => state.modalReset);
 
   return (
     <>
@@ -58,7 +59,10 @@ function App() {
         </select>
       </section>
       <section>
-        <button onClick={modalToggle}>Add</button>
+        <button onClick={() => {
+          modalReset();
+          modalToggle();
+        }}>Add</button>
       </section>
       <section>
         {todos.map((item) => {

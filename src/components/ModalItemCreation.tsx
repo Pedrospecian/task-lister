@@ -6,13 +6,18 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 	const modalFormSet = useModalStore((state) => state.modalFormSet);
 	const modalForm = useModalStore((state) => state.modalForm);
 	const addTodo = useTodoStore((state) => state.addTodo);
+	const editTodo = useTodoStore((state) => state.editTodo);
 
 	const fntSubmit = () => {
 		if (modalForm.title && modalForm.description) {
-			addTodo({
-				title: modalForm.title,
-				description: modalForm.description
-			});
+			if (modalForm.id) {
+				editTodo(modalForm);
+			} else {
+				addTodo({
+					title: modalForm.title,
+					description: modalForm.description
+				});
+			}
 			modalToggle();
 		}
 	}
@@ -20,7 +25,7 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 	return <div className="background">
 		<div className="modal-body">
 			<div class="ta-center ps-relative">
-				Criar item
+				{modalForm.id ? 'Editar' : 'Criar'} item
 			</div>
 			<form>
 				<input type="text" placeholder="Title" value={modalForm.title} onChange={(e) => {
@@ -37,7 +42,7 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 				<button onClick={() => {
 					fntSubmit();
 				}}>
-					Criar
+					{modalForm.id ? 'Editar' : 'Criar'}
 				</button>
 			</div>
 		</div>

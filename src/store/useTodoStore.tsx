@@ -20,6 +20,12 @@ const useTodoStore = create((set) => ({
         todo.id === id ? { ...todo, completed: !todo.completed } : todo,
       ),
     })),
+  editTodo: (item) =>
+    set((state) => ({
+      todos: state.todos.map((todo) =>
+        todo.id === item.id ? item : todo,
+      ),
+    })),
   deleteTodo: (id) =>
     set((state) => ({
       todos: state.todos.filter((todo) => todo.id !== id),

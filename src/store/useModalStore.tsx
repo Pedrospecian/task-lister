@@ -13,6 +13,16 @@ const useModalStore = create((set) => ({
     set((state) => ({
       modalIsOpen: !state.modalIsOpen,
     })),
+  modalReset: () => 
+    set((state) => ({
+      modalForm: {
+        id: 0,
+        title: '',
+        description: '',
+        created_at: null,
+        completed: false,
+      }
+    })),
   modalFormSet: (field, value) =>
     set((state) => ({
       modalForm: {
