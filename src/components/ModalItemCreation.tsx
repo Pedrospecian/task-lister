@@ -1,4 +1,8 @@
+import useModalStore from '../store/useModalStore'
+
 export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, setModalOpen, ...props }) {
+	const modalToggle = useModalStore((state) => state.modalToggle);
+
 	return <div className="background">
 		<div className="modal-body">
 			<div class="ta-center ps-relative">
@@ -9,9 +13,7 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 				<textarea placeholder="Description"></textarea>
 			</form>
 			<div class="flx-space-between">
-				<button onClick={() => {
-					setModalOpen(false);
-				}}>
+				<button onClick={modalToggle}>
 					Cancelar
 				</button>
 				<button onClick={() => {
