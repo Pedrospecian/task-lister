@@ -26,6 +26,7 @@ function App() {
   });
 
   const todos = useTodoStore((state) => state.todos);
+  const loadTodoFromLocalStorage = useTodoStore((state) => state.loadTodoFromLocalStorage);
   const modalIsOpen = useModalStore((state) => state.modalIsOpen);
   const modalToggle = useModalStore((state) => state.modalToggle);
   const modalReset = useModalStore((state) => state.modalReset);
@@ -66,7 +67,6 @@ function App() {
       </section>
       <section>
         {todos.filter((item) => {
-          console.log(searchCriteria, searchCompleted);
           if (searchValue) {
             if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
               return false;
