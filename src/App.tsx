@@ -31,63 +31,81 @@ function App() {
   const modalToggle = useModalStore((state) => state.modalToggle);
   const modalReset = useModalStore((state) => state.modalReset);
 
+  const searchFilter = (item) => {
+    if (searchValue) {
+      if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        return false;
+      }
+      if (searchCriteria.value === 2 && !item.description.toLowerCase().includes(searchValue.toLowerCase())) {
+        return false;
+      }
+    }
+
+    if (searchCompleted.value === 2 && !item.completed) {
+      return false;
+    }
+
+    if (searchCompleted.value === 3 && item.completed) {
+      return false;
+    }
+
+    return true;
+  }
+
   return (
     <>
       {modalIsOpen && <ModalItemCreation
         modalFormInfo={modalFormInfo}
         setModalFormInfo={setModalFormInfo}
       />}
-      <section id="center">
-        <input
-          value={searchValue}
-          onChange={(e) => {
-            setSearchValue(e.target.value);
-          }}
-        />
-        <select onChange={(e) => {
-          setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
-        }}>
-          {OPTIONS.map((item) => {
-            return <option key={item.value} value={item.value}>{item.label}</option>
-          })}
-        </select>
-        <select onChange={(e) => {
-          setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
-        }}>
-          {COMPLETION_OPTIONS.map((item) => {
-            return <option key={item.value} value={item.value}>{item.label}</option>
-          })}
-        </select>
+      <header class="header-main">
+        <div class="container">
+          <h1>Task Lister</h1>
+        </div>
+      </header>
+      <section className="search-header">
+        <div className="container">
+          <div className="flx-space-between">
+            <input
+              value={searchValue}
+              className={'input-field'}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
+            <select
+              className={'input-field'}
+              onChange={(e) => {
+              setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
+            }}>
+              {OPTIONS.map((item) => {
+                return <option key={item.value} value={item.value}>{item.label}</option>
+              })}
+            </select>
+            <select
+              className={'input-field'}
+              onChange={(e) => {
+              setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
+            }}>
+              {COMPLETION_OPTIONS.map((item) => {
+                return <option key={item.value} value={item.value}>{item.label}</option>
+              })}
+            </select>
+            <button className={'btn'} onClick={() => {
+              modalReset();
+              modalToggle();
+            }}>Add</button>
+          </div>
+        </div>
       </section>
       <section>
-        <button onClick={() => {
-          modalReset();
-          modalToggle();
-        }}>Add</button>
-      </section>
-      <section>
-        {todos.filter((item) => {
-          if (searchValue) {
-            if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
-              return false;
-            }
-            if (searchCriteria.value === 2 && !item.description.toLowerCase().includes(searchValue.toLowerCase())) {
-              return false;
-            }
-          }
-
-          if (searchCompleted.value === 2 && !item.completed) {
-            return false;
-          }
-
-          if (searchCompleted.value === 3 && item.completed) {
-            return false;
-          }
-
-          return true;
-        }).map((item) => {
-          return <Card key={item.id} item={item}/>
-        })}
+        <div class="container cards-container">
+          {todos.length < 1 && 'No items added yet'}
+          {todos.length >= 1 && todos.filter(searchFilter).length < 1 && 'No results for the search criteria'}
+          {todos.filter(searchFilter).map((item) => {
+            return <Card key={item.id} item={item}/>
+          })}
+        </div>
       </section>
     </>
   )

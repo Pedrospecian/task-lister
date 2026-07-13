@@ -24,25 +24,35 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 
 	return <div className="background">
 		<div className="modal-body">
-			<div class="ta-center ps-relative">
-				{modalForm.id ? 'Editar' : 'Criar'} item
+			<div class="ta-center ps-relative card-section">
+				{modalForm.id ? 'Edit' : 'Create'} item
 			</div>
-			<form>
-				<input type="text" placeholder="Title" value={modalForm.title} onChange={(e) => {
-					modalFormSet('title', e.target.value);
-				}}/>
-				<textarea placeholder="Description" value={modalForm.description} onChange={(e) => {
+			<form className="card-section">
+				<input
+					type="text" 
+            		className={'input-field'}
+            		placeholder="Title"
+            		value={modalForm.title}
+            		onChange={(e) => {
+						modalFormSet('title', e.target.value);
+					}}
+				/>
+				<textarea
+					placeholder="Description"
+					className={'input-field'}
+					value={modalForm.description}
+					onChange={(e) => {
 					modalFormSet('description', e.target.value);
 				}}></textarea>
 			</form>
-			<div class="flx-space-between">
-				<button onClick={modalToggle}>
-					Cancelar
+			<div class="flx-space-between card-section">
+				<button className={'btn btn-black'} onClick={modalToggle}>
+					Cancel
 				</button>
-				<button onClick={() => {
+				<button className={'btn'} onClick={() => {
 					fntSubmit();
 				}}>
-					{modalForm.id ? 'Editar' : 'Criar'}
+					{modalForm.id ? 'Edit' : 'Create'}
 				</button>
 			</div>
 		</div>

@@ -16,11 +16,22 @@ export default function Card({ item, ...props }) {
 		deleteTodo(item.id);
 	}
 
-	return <div>
-		{item.title} - {item.description}
-		<input type="checkbox" value={item.completed} onClick={toggleTodo} />Completo
-		<div>Criado em: {item.createdAt}</div>
-		<button onClick={fntEditItem}>Editar</button>
-		<button onClick={fntDeleteItem}>Excluir</button>
-	</div>
+	return (<div>
+		<div className="card-single">
+			<div className="card-section">
+				<div className="card-title">{item.title}</div>
+				<div className="card-date">Created at {item.createdAt}</div>
+			</div>
+			<div className="card-section">
+				{item.description}
+			</div>
+			<div className="card-section flx-space-between">
+				<input type="checkbox" value={item.completed} onClick={toggleTodo} />Done
+			</div>
+			<div className="card-section flx-space-between">
+				<button onClick={fntEditItem} className={'btn'}>Edit</button>
+				<button onClick={fntDeleteItem} className={'btn btn-red'}>Delete</button>
+			</div>
+		</div>
+	</div>)
 }
