@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Card from './components/Card'
+import ModalItemCreation from './components/ModalItemCreation'
 import './App.css'
 
 const OPTIONS = [
@@ -18,9 +19,19 @@ function App() {
   const [searchCriteria, setSearchCriteria] = useState(1);
   const [searchCompleted, setSearchCompleted] = useState(1);
   const [items, setItems] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalFormInfo, setModalFormInfo] = useState({
+    name: '',
+    description: ''
+  });
 
   return (
     <>
+      {modalOpen && <ModalItemCreation
+        modalFormInfo={modalFormInfo}
+        setModalFormInfo={setModalFormInfo}
+        setModalOpen={setModalOpen}
+      />}
       <section id="center">
         <input
           value={searchValue}
@@ -42,6 +53,9 @@ function App() {
             return <option key={item.value} selected={searchCompleted.selected === item.value} value={item.value}>{item.label}</option>
           })}
         </select>
+      </section>
+      <section>
+        <button onClick={()=> setModalOpen(true)}>Add</button>
       </section>
       <section>
         {items.map((item) => {
