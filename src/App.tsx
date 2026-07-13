@@ -18,8 +18,8 @@ const COMPLETION_OPTIONS = [
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
-  const [searchCriteria, setSearchCriteria] = useState(1);
-  const [searchCompleted, setSearchCompleted] = useState(1);
+  const [searchCriteria, setSearchCriteria] = useState({value: 1, label: 'Title'});
+  const [searchCompleted, setSearchCompleted] = useState({value: 1, label: 'All'});
   const [modalFormInfo, setModalFormInfo] = useState({
     name: '',
     description: ''
@@ -44,17 +44,17 @@ function App() {
           }}
         />
         <select onChange={(e) => {
-          setSearchCriteria(e);
+          setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
         }}>
           {OPTIONS.map((item) => {
-            return <option key={item.value} selected={searchCriteria.selected === item.value} value={item.value}>{item.label}</option>
+            return <option key={item.value} value={item.value}>{item.label}</option>
           })}
         </select>
         <select onChange={(e) => {
-          setSearchCompleted(e);
+          setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
         }}>
           {COMPLETION_OPTIONS.map((item) => {
-            return <option key={item.value} selected={searchCompleted.selected === item.value} value={item.value}>{item.label}</option>
+            return <option key={item.value} value={item.value}>{item.label}</option>
           })}
         </select>
       </section>
@@ -65,8 +65,27 @@ function App() {
         }}>Add</button>
       </section>
       <section>
-        {todos.map((item) => {
-          console.log('item---', item);
+        {todos.filter((item) => {
+          console.log(searchCriteria, searchCompleted);
+          if (searchValue) {
+            if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
+              return false;
+            }
+            if (searchCriteria.value === 2 && !item.description.toLowerCase().includes(searchValue.toLowerCase())) {
+              return false;
+            }
+          }
+
+          if (searchCompleted.value === 2 && !item.completed) {
+            return false;
+          }
+
+          if (searchCompleted.value === 3 && item.completed) {
+            return false;
+          }
+
+          return true;
+        }).map((item) => {
           return <Card key={item.id} item={item}/>
         })}
       </section>
