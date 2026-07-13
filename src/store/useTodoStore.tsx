@@ -2,14 +2,14 @@ import { create } from "zustand";
 
 const useTodoStore = create((set) => ({
   todos: [],
-  addTodo: ({ title, description }) =>
+  addTodo: (item) =>
     set((state) => ({
       todos: [
         ...state.todos,
         {
           id: Date.now(),
-          title: title,
-          description: description,
+          title: item.title,
+          description: item.description,
           completed: false,
         },
       ],

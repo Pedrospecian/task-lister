@@ -62,6 +62,7 @@ function App() {
       </section>
       <section>
         {todos.map((item) => {
+          console.log('item---', item);
           return <Card key={item.id} item={item}/>
         })}
       </section>
