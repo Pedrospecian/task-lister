@@ -105,7 +105,7 @@ export default function ModalItemCreation() {
 					/>
 				</div>
 				<div className="flx-space-between card-section">
-					<button className={'btn btn-black btn-large'} onClick={modalToggle}>
+					<button className={'btn btn-black btn-large'} type="button" onClick={modalToggle}>
 						Cancel
 					</button>
 					<button className={'btn btn-large'} type="button" onClick={() => {
