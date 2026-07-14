@@ -10,7 +10,7 @@ const item = {
   id: 1,
   title: 'Fix bug #558',
   description: 'Fix the bug in the contact listing page',
-  createdAt: '14/07/2026, 09:36:27',
+  created_at: '14/07/2026, 09:36:27',
   completed: false,
 }
 

@@ -2,7 +2,7 @@ interface InputCheckboxProps {
   id?: string;
   className?: string;
   placeholder?: string;
-  value: string;
+  value: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
 }
