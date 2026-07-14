@@ -8,6 +8,7 @@ import InputText from './components/form/InputText'
 import SelectField from './components/form/SelectField'
 import './App.css'
 import { OPTIONS, COMPLETION_OPTIONS } from './utils/filters'
+import type { Todo } from './interfaces/todo';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
@@ -19,7 +20,7 @@ function App() {
   const modalToggle = useModalStore((state) => state.modalToggle);
   const formReset = useTodoFormStore((state) => state.formReset);
 
-  const fntSearchFilter = (item) => {
+  const fntSearchFilter = (item: Todo) => {
     if (searchValue) {
       if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return false;
@@ -85,7 +86,7 @@ function App() {
                 label={"Criterion"}
                 className={'input-field'}
                 onChange={(e) => {
-                  setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
+                  setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value))!);
                 }}
                 options={OPTIONS}
               />
@@ -94,7 +95,7 @@ function App() {
                 label={"Status"}
                 className={'input-field'}
                 onChange={(e) => {
-                  setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
+                  setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value))!);
                 }}
                 options={COMPLETION_OPTIONS}
               />

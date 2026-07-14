@@ -17,8 +17,7 @@ export default function InputText({
 	value,
 	onChange,
 	label,
-	error,
-	...props
+	error
 }: InputTextProps) {
 	return (
 		<div className="form-field-wrapper">

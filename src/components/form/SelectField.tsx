@@ -15,8 +15,7 @@ export default function SelectField({
   label,
   onChange,
   options,
-  error,
-  ...props
+  error
 }: SelectFieldProps) {
 	return (
 		<div className="form-field-wrapper">

@@ -1,7 +1,6 @@
 interface InputTextareaProps {
   id?: string;
   className?: string;
-  type?: string;
   placeholder?: string;
   value: string;
   onChange: (React.ChangeEventHandler<HTMLTextAreaElement, HTMLTextAreaElement>);
@@ -12,20 +11,17 @@ interface InputTextareaProps {
 export default function InputTextarea({
 	id,
 	className,
-	type,
 	placeholder,
 	value,
 	onChange,
 	label,
-	error,
-	...props
+	error
 }: InputTextareaProps) {
 	return (
 		<div className="form-field-wrapper">
 			{label && <label className={'form-label'} htmlFor={id}>{label}</label>}
 			<textarea
 				id={id}
-				type={type}
 				className={`textarea-field ${className} ${error && 'field-error'}`}
 				placeholder={placeholder}
 				value={value}

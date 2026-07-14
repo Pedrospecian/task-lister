@@ -2,8 +2,13 @@ import useModalStore from '../store/useModalStore'
 import useTodoStore from '../store/useTodoStore'
 import useTodoFormStore from '../store/useTodoFormStore'
 import InputCheckbox from './form/InputCheckbox'
+import type { Todo } from '../interfaces/todo';
 
-export default function Card({ item, ...props }) {
+interface CardProps {
+	item: Todo
+}
+
+export default function Card({ item }: CardProps) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
 	const loadForm = useTodoFormStore((state) => state.loadForm);
 	const deleteTodo = useTodoStore((state) => state.deleteTodo);
