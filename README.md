@@ -11,19 +11,24 @@ This app was built with React 19, TypeScript, Vite, and Zustand.
 
 ## Screenshots
 
-Home page
+**Home page**
+
 ![Home](docs/screenshots/home.png)
 
-Modal for creating new todo items
+**Modal for creating new todo items**
+
 ![Create](docs/screenshots/todo-creation.png)
 
-Modal for editing todo items
+**Modal for editing todo items**
+
 ![Edit](docs/screenshots/todo-edit.png)
 
-Search by title
+**Search by title**
+
 ![Filter1](docs/screenshots/filter1.png)
 
-Show only completed items
+**Show only completed items**
+
 ![Filter2](docs/screenshots/filter2.png)
 
 ## Tech stack
