@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useTodoStore from './store/useTodoStore'
+import useTodoFormStore from './store/useTodoFormStore'
 import useModalStore from './store/useModalStore'
 import Card from './components/Card'
 import ModalItemCreation from './components/modals/ModalItemCreation'
@@ -16,7 +17,7 @@ function App() {
   const todos = useTodoStore((state) => state.todos);
   const modalIsOpen = useModalStore((state) => state.modalIsOpen);
   const modalToggle = useModalStore((state) => state.modalToggle);
-  const modalReset = useModalStore((state) => state.modalReset);
+  const formReset = useTodoFormStore((state) => state.formReset);
 
   const fntSearchFilter = (item) => {
     if (searchValue) {
@@ -98,7 +99,7 @@ function App() {
           </div>
           <div>
             <button className={'btn btn-large'} onClick={() => {
-              modalReset();
+              formReset();
               modalToggle();
             }}>+ New item</button>
           </div>

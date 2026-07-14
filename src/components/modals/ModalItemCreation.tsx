@@ -1,30 +1,31 @@
 import useModalStore from '../../store/useModalStore'
 import useTodoStore from '../../store/useTodoStore'
+import useTodoFormStore from '../../store/useTodoFormStore'
 import InputText from '../form/InputText'
 import InputTextarea from '../form/InputTextarea'
 
 export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, setModalOpen, ...props }) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
-	const modalFormSet = useModalStore((state) => state.modalFormSet);
-	const modalFormSetError = useModalStore((state) => state.modalFormSetError);
-	const modalForm = useModalStore((state) => state.modalForm);
+	const todoFormSet = useTodoFormStore((state) => state.todoFormSet);
+	const todoFormSetError = useTodoFormStore((state) => state.todoFormSetError);
+	const todoForm = useTodoFormStore((state) => state.todoForm);
 	const addTodo = useTodoStore((state) => state.addTodo);
 	const editTodo = useTodoStore((state) => state.editTodo);
 
 	const fntFormValid = () => {
 		let isFormValid = true;
-		if (!modalForm.title) {
-			modalFormSetError('title', 'Required field');
+		if (!todoForm.title) {
+			todoFormSetError('title', 'Required field');
 			isFormValid = false;
 		} else {
-			modalFormSetError('title', '');
+			todoFormSetError('title', '');
 		}
 
-		if (!modalForm.description) {
-			modalFormSetError('description', 'Required field');
+		if (!todoForm.description) {
+			todoFormSetError('description', 'Required field');
 			isFormValid = false;
 		} else {
-			modalFormSetError('description', '');
+			todoFormSetError('description', '');
 		}
 
 		return isFormValid;
@@ -32,12 +33,12 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 
 	const fntSubmit = () => {
 		if (fntFormValid()) {
-			if (modalForm.id) {
-				editTodo(modalForm);
+			if (todoForm.id) {
+				editTodo(todoForm);
 			} else {
 				addTodo({
-					title: modalForm.title,
-					description: modalForm.description
+					title: todoForm.title,
+					description: todoForm.description
 				});
 			}
 			modalToggle();
@@ -45,7 +46,7 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 	}
 
 	const fntGetActionLabel = () => {
-		return modalForm.id ? 'Edit' : 'Create'
+		return todoForm.id ? 'Edit' : 'Create'
 	}
 
 	return <div className="background">
@@ -59,27 +60,27 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 					type="text" 
             		className={'input-field'}
             		placeholder="Title"
-            		value={modalForm.title}
+            		value={todoForm.title}
             		onChange={(e) => {
-						modalFormSet('title', e.target.value);
+						todoFormSet('title', e.target.value);
 						if (e.target.value) {
-							modalFormSetError('title', '');
+							todoFormSetError('title', '');
 						}
 					}}
-					error={modalForm.errors.title}
+					error={todoForm.errors.title}
 				/>
 				<InputTextarea
 					label="Description"
 					placeholder="Description"
 					className={'input-field'}
-					value={modalForm.description}
+					value={todoForm.description}
 					onChange={(e) => {
-						modalFormSet('description', e.target.value);
+						todoFormSet('description', e.target.value);
 						if (e.target.value) {
-							modalFormSetError('description', '');
+							todoFormSetError('description', '');
 						}
 					}}
-					error={modalForm.errors.description}
+					error={todoForm.errors.description}
 				/>
 			</form>
 			<div className="flx-space-between card-section">

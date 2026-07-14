@@ -4,7 +4,7 @@ export default function SelectField({ id, className, value, label, onChange, opt
 			{label && <label className={'form-label'} htmlFor={id}>{label}</label>}
 			<select
 				id={id}
-				className={`${className} ${error && 'field-error'}`}
+				className={`${className} ${error ? 'field-error' : ''}`}
 				value={value}
 				onChange={onChange}
 			>
