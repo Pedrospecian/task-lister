@@ -56,6 +56,7 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 			</div>
 			<form className="card-section">
 				<InputText
+					id="title"
 					label="Title"
 					type="text" 
             		className={'input-field'}
@@ -70,6 +71,7 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 					error={todoForm.errors.title}
 				/>
 				<InputTextarea
+					id="description"
 					label="Description"
 					placeholder="Description"
 					className={'input-field'}

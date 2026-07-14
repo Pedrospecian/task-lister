@@ -127,6 +127,15 @@ describe('App', () => {
   })
 
   it('Tests the full todo item creation flow', async () => {
-    
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.click(screen.getByRole('button', { name: '+ New item' }))
+    await user.type(screen.getByLabelText('Title'), 'Fix bug #540')
+    await user.type(screen.getByLabelText('Description'), 'Fix the bug in the contact creation page')
+    await user.click(screen.getByRole('button', { name: 'Create' }))
+
+    expect(screen.getByText('Fix bug #540')).toBeInTheDocument()
+    expect(screen.queryByText('Create item')).not.toBeInTheDocument()
   })
 });
