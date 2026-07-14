@@ -1,0 +1,17 @@
+export default function SelectField({ id, className, value, label, onChange, options, ...props }) {
+	return (
+		<div className="form-field-wrapper">
+			{label && <label className={'form-label'} for={id}>{label}</label>}
+			<select
+				id={id}
+				className={className}
+				value={value}
+				onChange={onChange}
+			>
+				{options.map((item) => {
+	                return <option key={item.value} value={item.value}>{item.label}</option>
+	            })}
+            </select>
+		</div>
+	);
+}

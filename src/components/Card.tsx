@@ -1,5 +1,6 @@
 import useModalStore from '../store/useModalStore'
 import useTodoStore from '../store/useTodoStore'
+import InputCheckbox from './form/InputCheckbox'
 
 export default function Card({ item, ...props }) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
@@ -26,11 +27,18 @@ export default function Card({ item, ...props }) {
 				{item.description}
 			</div>
 			<div className="card-section flx-space-between">
-				<input type="checkbox" value={item.completed} onClick={toggleTodo} />Done
-			</div>
-			<div className="card-section flx-space-between">
-				<button onClick={fntEditItem} className={'btn'}>Edit</button>
-				<button onClick={fntDeleteItem} className={'btn btn-red'}>Delete</button>
+				<div>
+					<InputCheckbox
+						value={item.completed}
+						onChange={toggleTodo}
+						id={`done-${item.id}`}
+						label={'Done'}
+					/>
+				</div>
+				<div className="flx-space-between">
+					<button onClick={fntEditItem} className={'btn'}>Edit</button>
+					<button onClick={fntDeleteItem} className={'btn btn-red'}>Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>)

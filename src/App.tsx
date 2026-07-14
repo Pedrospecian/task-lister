@@ -2,31 +2,18 @@ import { useState } from 'react'
 import useTodoStore from './store/useTodoStore'
 import useModalStore from './store/useModalStore'
 import Card from './components/Card'
-import ModalItemCreation from './components/ModalItemCreation'
+import ModalItemCreation from './components/modals/ModalItemCreation'
+import InputText from './components/form/InputText'
+import SelectField from './components/form/SelectField'
 import './App.css'
-
-const OPTIONS = [
-  {value: 1, label: 'Title'},
-  {value: 2, label: 'Description'}
-];
-
-const COMPLETION_OPTIONS = [
-  {value: 1, label: 'All'},
-  {value: 2, label: 'Completed'},
-  {value: 3, label: 'Incomplete'}
-];
+import { OPTIONS, COMPLETION_OPTIONS } from './utils/filters'
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
   const [searchCriteria, setSearchCriteria] = useState({value: 1, label: 'Title'});
   const [searchCompleted, setSearchCompleted] = useState({value: 1, label: 'All'});
-  const [modalFormInfo, setModalFormInfo] = useState({
-    name: '',
-    description: ''
-  });
 
   const todos = useTodoStore((state) => state.todos);
-  const loadTodoFromLocalStorage = useTodoStore((state) => state.loadTodoFromLocalStorage);
   const modalIsOpen = useModalStore((state) => state.modalIsOpen);
   const modalToggle = useModalStore((state) => state.modalToggle);
   const modalReset = useModalStore((state) => state.modalReset);
@@ -54,10 +41,7 @@ function App() {
 
   return (
     <>
-      {modalIsOpen && <ModalItemCreation
-        modalFormInfo={modalFormInfo}
-        setModalFormInfo={setModalFormInfo}
-      />}
+      {modalIsOpen && <ModalItemCreation />}
       <header class="header-main">
         <div class="container">
           <h1>Task Lister</h1>
@@ -65,36 +49,40 @@ function App() {
       </header>
       <section className="search-header">
         <div className="container">
-          <div className="flx-space-between">
-            <input
+          <div>
+            <InputText
               value={searchValue}
+              label={"Search"}
+              type={'text'}
               className={'input-field'}
               onChange={(e) => {
                 setSearchValue(e.target.value);
               }}
             />
-            <select
-              className={'input-field'}
-              onChange={(e) => {
-              setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
-            }}>
-              {OPTIONS.map((item) => {
-                return <option key={item.value} value={item.value}>{item.label}</option>
-              })}
-            </select>
-            <select
-              className={'input-field'}
-              onChange={(e) => {
-              setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
-            }}>
-              {COMPLETION_OPTIONS.map((item) => {
-                return <option key={item.value} value={item.value}>{item.label}</option>
-              })}
-            </select>
-            <button className={'btn'} onClick={() => {
+            <div className="search-fields-wrapper">
+              <SelectField
+                label={"Criterion"}
+                className={'input-field'}
+                onChange={(e) => {
+                  setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
+                }}
+                options={OPTIONS}
+              />
+              <SelectField
+                label={"Status"}
+                className={'input-field'}
+                onChange={(e) => {
+                  setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)));
+                }}
+                options={COMPLETION_OPTIONS}
+              />
+            </div>
+          </div>
+          <div>
+            <button className={'btn btn-large'} onClick={() => {
               modalReset();
               modalToggle();
-            }}>Add</button>
+            }}>+ New item</button>
           </div>
         </div>
       </section>

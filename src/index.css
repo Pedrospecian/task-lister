@@ -24,6 +24,8 @@
 .flx-space-between {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 .ps-relative {
@@ -47,11 +49,16 @@
 
 .btn {
   border-radius: 6px;
-  padding: 6px;
+  padding: 6px 9px;
+  font-size: 16px;
   background-color: #2478ff;
   color: #ffffff;
   border: none;
   cursor: pointer;
+}
+
+.btn.btn-large {
+  padding: 12px 18px;
 }
 
 .btn.btn-red {
@@ -66,10 +73,22 @@
   padding: 9px 12px;
   border-radius: 6px;
   border: solid 1px #cccccc;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 24px;
   width: 100%;
   background-color: #ffffff;
   color: #1d1d1d;
+  height: 36px;
+}
+
+.textarea-field {
+  resize: vertical;
+  height: auto;
+  min-height: 108px;
+}
+
+.form-field-wrapper {
+  margin-bottom: 12px;
 }
 
 .search-header {
@@ -84,4 +103,17 @@
 .card-date {
   font-size: 12px;
   color: #999999;
+}
+
+.search-fields-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  gap: 12px;
+}
+
+.form-label {
+  padding-left: 12px;
+  font-size: 14px;
+  color: #444444;
 }

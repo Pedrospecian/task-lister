@@ -1,5 +1,7 @@
-import useModalStore from '../store/useModalStore'
-import useTodoStore from '../store/useTodoStore'
+import useModalStore from '../../store/useModalStore'
+import useTodoStore from '../../store/useTodoStore'
+import InputText from '../form/InputText'
+import InputTextarea from '../form/InputTextarea'
 
 export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, setModalOpen, ...props }) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
@@ -28,7 +30,8 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 				{modalForm.id ? 'Edit' : 'Create'} item
 			</div>
 			<form className="card-section">
-				<input
+				<InputText
+					label="Title"
 					type="text" 
             		className={'input-field'}
             		placeholder="Title"
@@ -37,19 +40,21 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 						modalFormSet('title', e.target.value);
 					}}
 				/>
-				<textarea
+				<InputTextarea
+					label="Description"
 					placeholder="Description"
 					className={'input-field'}
 					value={modalForm.description}
 					onChange={(e) => {
-					modalFormSet('description', e.target.value);
-				}}></textarea>
+						modalFormSet('description', e.target.value);
+					}}
+				/>
 			</form>
 			<div class="flx-space-between card-section">
-				<button className={'btn btn-black'} onClick={modalToggle}>
+				<button className={'btn btn-black btn-large'} onClick={modalToggle}>
 					Cancel
 				</button>
-				<button className={'btn'} onClick={() => {
+				<button className={'btn btn-large'} onClick={() => {
 					fntSubmit();
 				}}>
 					{modalForm.id ? 'Edit' : 'Create'}
