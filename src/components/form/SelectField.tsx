@@ -1,7 +1,7 @@
 interface SelectFieldProps {
   id?: string;
   className?: string;
-  value: number | string;
+  value?: number | string;
   label?: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: { value: number; label: string }[];

@@ -5,8 +5,9 @@ import ModalItemCreation from './ModalItemCreation'
 import useModalStore from '../../store/useModalStore'
 import useTodoStore from '../../store/useTodoStore'
 import useTodoFormStore from '../../store/useTodoFormStore'
+import type { TodoForm } from '../../interfaces/todo';
 
-const emptyForm = {
+const emptyForm: TodoForm = {
   id: 0,
   title: '',
   description: '',
@@ -80,7 +81,13 @@ describe('ModalItemCreation', () => {
 
   it('edits an existing todo instead of creating a new one when form has an id', async () => {
     useTodoStore.setState({
-      todos: [{ id: 7, title: 'Existing', description: 'Existing desc', completed: false }],
+      todos: [{
+        id: 7,
+        title: 'Existing',
+        description: 'Existing desc',
+        completed: false,
+        createdAt: '14/07/2026 10:43:15'
+      }],
     })
     useTodoFormStore.setState({
       todoForm: { ...emptyForm, id: 7, title: 'Existing', description: 'Existing desc' },
