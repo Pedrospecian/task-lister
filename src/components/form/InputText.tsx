@@ -1,4 +1,25 @@
-export default function InputText({ className, type, id, placeholder, value, onChange, label, error, ...props }) {
+interface InputTextProps {
+  id?: string;
+  className?: string;
+  type: string;
+  placeholder?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label?: string;
+  error?: string;
+}
+
+export default function InputText({
+	className,
+	type,
+	id,
+	placeholder,
+	value,
+	onChange,
+	label,
+	error,
+	...props
+}: InputTextProps) {
 	return (
 		<div className="form-field-wrapper">
 			{label && <label className={'form-label'} htmlFor={id}>{label}</label>}

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Todo, TodoStore } from '../interfaces/todo';
+import type { TodoStore } from '../interfaces/todo';
 
 const useTodoStore = create<TodoStore>()(
   persist(
@@ -14,7 +14,7 @@ const useTodoStore = create<TodoStore>()(
               id: Date.now(),
               title: item.title,
               description: item.description,
-              createdAt: new Date().toLocaleString("pt-BR"),
+              created_at: new Date().toLocaleString("pt-BR"),
               completed: false,
             },
           ],
@@ -35,10 +35,6 @@ const useTodoStore = create<TodoStore>()(
         set((state) => ({
           todos: state.todos.filter((todo) => todo.id !== id),
         })),
-      saveTodoFromLocalStorage: () =>
-        set((state) => {
-          localStorage.setItem('todos', state.todos);
-        }),
     }),
     {
       name: "todo-storage",

@@ -38,14 +38,14 @@ describe('App', () => {
           title: 'Fix bug #540',
           description: 'Fix the bug in the contact creation page',
           completed: false,
-          createdAt: 'now'
+          created_at: 'now'
         },
         {
           id: 2,
           title: 'Implement facial recognition system',
           description: 'Implement the new facial recognition system, which must reduce the overall proccessing time',
           completed: true,
-          createdAt: 'now'
+          created_at: 'now'
         },
       ],
     })
@@ -63,14 +63,14 @@ describe('App', () => {
           title: 'Fix bug #540',
           description: 'Fix the bug in the contact creation page',
           completed: false,
-          createdAt: 'now'
+          created_at: 'now'
         },
         {
           id: 2,
           title: 'Implement facial recognition system',
           description: 'Implement the new facial recognition system, which must reduce the overall proccessing time',
           completed: false,
-          createdAt: 'now'
+          created_at: 'now'
         },
       ],
     })
@@ -91,7 +91,7 @@ describe('App', () => {
           title: 'Fix bug #540',
           description: 'Fix the bug in the contact creation page',
           completed: false,
-          createdAt: 'now'
+          created_at: 'now'
         }
       ],
     })

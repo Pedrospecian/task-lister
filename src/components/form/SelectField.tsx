@@ -1,4 +1,23 @@
-export default function SelectField({ id, className, value, label, onChange, options, error, ...props }) {
+interface SelectFieldProps {
+  id?: string;
+  className?: string;
+  value: number | string;
+  label?: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  options: { value: number; label: string }[];
+  error?: string;
+}
+
+export default function SelectField({
+  id,
+  className,
+  value,
+  label,
+  onChange,
+  options,
+  error,
+  ...props
+}: SelectFieldProps) {
 	return (
 		<div className="form-field-wrapper">
 			{label && <label className={'form-label'} htmlFor={id}>{label}</label>}

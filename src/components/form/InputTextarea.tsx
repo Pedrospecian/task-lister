@@ -1,4 +1,25 @@
-export default function InputTextarea({ className, type, id, placeholder, value, onChange, label, error, ...props }) {
+interface InputTextareaProps {
+  id?: string;
+  className?: string;
+  type?: string;
+  placeholder?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label?: string;
+  error?: string;
+}
+
+export default function InputTextarea({
+	id,
+	className,
+	type,
+	placeholder,
+	value,
+	onChange,
+	label,
+	error,
+	...props
+}: InputTextareaProps) {
 	return (
 		<div className="form-field-wrapper">
 			{label && <label className={'form-label'} htmlFor={id}>{label}</label>}
