@@ -64,15 +64,15 @@ Every `*.test.tsx` file sits next to the file it tests, so it's easy to find:
 ```
 src/
 ├── App.test.tsx
-├── components/
-│   ├── Card.test.tsx
-│   ├── form/
-│   │   ├── InputCheckbox.test.tsx
-│   │   ├── InputText.test.tsx
-│   │   ├── InputTextarea.test.tsx
-│   │   └── SelectField.test.tsx
-│   └── modals/
-│       └── ModalItemCreation.test.tsx
+└── components/
+    ├── Card.test.tsx
+    ├── form/
+    │   ├── InputCheckbox.test.tsx
+    │   ├── InputText.test.tsx
+    │   ├── InputTextarea.test.tsx
+    │   └── SelectField.test.tsx
+    └── modals/
+        └── ModalItemCreation.test.tsx
 ```
 
 **Coverage:**
@@ -110,10 +110,10 @@ src/
 │   ├── useTodoStore.tsx          # the todos themselves (persisted to localStorage)
 │   ├── useTodoFormStore.tsx      # draft state + validation errors for the open form
 │   └── useModalStore.tsx         # whether the create/edit modal is open
-└── utils/
-    └── filters.tsx               # option lists for the search-by/status selects
+├── utils/
+│    └── filters.tsx              # option lists for the search-by/status selects
 └── interfaces/
-    └── modal.tsx                 # contains an interface for the modal's status
+    ├── modal.tsx                 # contains an interface for the modal's status
     └── todo.tsx                  # contains interfaces for todo items and for the todo form
 ```
 
