@@ -10,7 +10,12 @@ A small single-page to-do list app. With this app, you can:
 This app was built with React 19, TypeScript, Vite, and Zustand.
 
 ## Screenshots
-TBD
+
+![Home](docs/screenshots/home.png)
+![Create](docs/screenshots/todo-creation.png)
+![Edit](docs/screenshots/todo-edit.png)
+![Filter1](docs/screenshots/filter1.png)
+![Filter2](docs/screenshots/filter2.png)
 
 ## Tech stack
 
