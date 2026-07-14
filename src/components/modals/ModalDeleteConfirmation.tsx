@@ -38,10 +38,10 @@ export default function ModalItemCreation() {
 					This action cannot be undone.
 				</div>
 				<div className="flx-space-between card-section">
-					<button className={'btn btn-black btn-large'} onClick={modalToggleConfirm}>
+					<button className={'btn btn-black btn-large'} role="button" onClick={modalToggleConfirm}>
 						Cancel
 					</button>
-					<button className={'btn btn-large'} type="button" onClick={() => {
+					<button className={'btn btn-large'} type="button" role="button" name="Confirm" onClick={() => {
 						handleDeleteItem();
 					}}>
 						Confirm

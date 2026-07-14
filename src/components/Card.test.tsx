@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Card from './Card'
+import ModalDeleteConfirmation from './modals/ModalDeleteConfirmation'
 import useModalStore from '../store/useModalStore'
 import useTodoStore from '../store/useTodoStore'
 import useTodoFormStore from '../store/useTodoFormStore'
@@ -15,7 +16,10 @@ const item = {
 }
 
 beforeEach(() => {
-  useModalStore.setState({ modalIsOpen: false })
+  useModalStore.setState({
+    modalIsOpen: false,
+    modalConfirmIsOpen: false,
+  })
   useTodoStore.setState({ todos: [item] })
   useTodoFormStore.setState({
     todoForm: {
@@ -34,7 +38,7 @@ beforeEach(() => {
 
 describe('Card', () => {
   it('Renders the title, description, and creation date', () => {
-    render(<Card item={item} />)
+    render(<Card key={'1'} item={item} />)
 
     expect(screen.getByText('Fix bug #558')).toBeInTheDocument()
     expect(screen.getByText('Fix the bug in the contact listing page')).toBeInTheDocument()
@@ -42,32 +46,38 @@ describe('Card', () => {
   })
 
   it('Reflects the completed state in the "Done" checkbox', () => {
-    render(<Card item={{ ...item, completed: true }} />)
+    render(<Card key={'1'} item={{ ...item, completed: true }} />)
     expect(screen.getByLabelText('Done')).toBeChecked()
   })
 
   it('Toggles completion in the todo store by clicking "Done"', async () => {
     const user = userEvent.setup()
 
-    render(<Card item={item} />)
+    render(<Card key={'1'} item={item} />)
 
     await user.click(screen.getByLabelText('Done'))
 
     expect(useTodoStore.getState().todos.find((t) => t.id === 1)?.completed).toBe(true)
   })
 
-  it('Removes the item from the todo store by clicking "Delete"', async () => {
+  it('Shows the confirmation modal by clicking "Delete"', async () => {
     const user = userEvent.setup()
-    render(<Card item={item} />)
+    render(<Card key={'1'} item={item} />)
 
     await user.click(screen.getByRole('button', { name: 'Delete' }))
 
-    expect(useTodoStore.getState().todos.find((t) => t.id === 1)).toBeUndefined()
+    expect(useTodoFormStore.getState().todoForm).toMatchObject({
+      id: 1,
+      title: 'Fix bug #558',
+      description: 'Fix the bug in the contact listing page',
+    })
+
+    expect(useModalStore.getState().modalConfirmIsOpen).toBe(true)
   })
 
   it('Loads the item into the form store and opens the modal by clicking "Edit"', async () => {
     const user = userEvent.setup()
-    render(<Card item={item} />)
+    render(<Card key={'1'} item={item} />)
 
     await user.click(screen.getByRole('button', { name: 'Edit' }))
 
