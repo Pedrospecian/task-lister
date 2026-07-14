@@ -5,7 +5,7 @@ import ModalDeleteConfirmation from './ModalDeleteConfirmation'
 import useModalStore from '../../store/useModalStore'
 import useTodoStore from '../../store/useTodoStore'
 import useTodoFormStore from '../../store/useTodoFormStore'
-import type { TodoForm } from '../../interfaces/todo';
+import type { TodoForm } from '../../interfaces/todo'
 
 const itemToBeDeleted: TodoForm = {
   id: 7,

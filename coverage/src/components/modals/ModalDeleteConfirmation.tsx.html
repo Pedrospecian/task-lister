@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/19</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">86.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/16</span>
+                <span class='fraction'>13/15</span>
             </div>
         
             
@@ -113,8 +113,8 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,7 +144,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,11 +163,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect } from 'react'
 import useModalStore from '../../store/useModalStore'
 import useTodoStore from '../../store/useTodoStore'
 import useTodoFormStore from '../../store/useTodoFormStore'
+import Modal from './Modal'
 &nbsp;
 export default function ModalItemCreation() {
 	const modalToggleConfirm = useModalStore((state) =&gt; state.modalToggleConfirm);
@@ -194,28 +193,26 @@ export default function ModalItemCreation() {
 		};
 	}, []);
 &nbsp;
-	return &lt;div className="background" onClick={modalToggleConfirm}&gt;
-		&lt;div className="modal-body" role="dialog" aria-modal onClick={e =&gt; e.stopPropagation()}&gt;
-				&lt;div className="ta-center ps-relative card-section"&gt;
-					Delete item
-				&lt;/div&gt;
-				&lt;div className="ta-center ps-relative card-section"&gt;
-					Are you sure that you want to delete the item &lt;strong&gt;"{todoForm.title}"&lt;/strong&gt;?
-					&lt;br /&gt;
-					This action cannot be undone.
-				&lt;/div&gt;
-				&lt;div className="flx-space-between card-section"&gt;
-					&lt;button className={'btn btn-black btn-large'} role="button" onClick={modalToggleConfirm}&gt;
-						Cancel
-					&lt;/button&gt;
-					&lt;button className={'btn btn-large'} type="button" role="button" name="Confirm" onClick={() =&gt; {
-						handleDeleteItem();
-					}}&gt;
-						Confirm
-					&lt;/button&gt;
-				&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
+	return &lt;Modal modalToggle={modalToggleConfirm}&gt;
+			&lt;div className="ta-center ps-relative card-section"&gt;
+				Delete item
+			&lt;/div&gt;
+			&lt;div className="ta-center ps-relative card-section"&gt;
+				Are you sure that you want to delete the item &lt;strong&gt;"{todoForm.title}"&lt;/strong&gt;?
+				&lt;br /&gt;
+				This action cannot be undone.
+			&lt;/div&gt;
+			&lt;div className="flx-space-between card-section"&gt;
+				&lt;button className={'btn btn-black btn-large'} role="button" onClick={modalToggleConfirm}&gt;
+					Cancel
+				&lt;/button&gt;
+				&lt;button className={'btn btn-large'} type="button" role="button" name="Confirm" onClick={() =&gt; {
+					handleDeleteItem();
+				}}&gt;
+					Confirm
+				&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/Modal&gt;
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -223,7 +220,7 @@ export default function ModalItemCreation() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-14T20:17:12.334Z
+                at 2026-07-14T20:28:06.129Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

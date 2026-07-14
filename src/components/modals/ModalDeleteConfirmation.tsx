@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import useModalStore from '../../store/useModalStore'
 import useTodoStore from '../../store/useTodoStore'
 import useTodoFormStore from '../../store/useTodoFormStore'
+import Modal from './Modal'
 
 export default function ModalItemCreation() {
 	const modalToggleConfirm = useModalStore((state) => state.modalToggleConfirm);
@@ -27,26 +28,24 @@ export default function ModalItemCreation() {
 		};
 	}, []);
 
-	return <div className="background" onClick={modalToggleConfirm}>
-		<div className="modal-body" role="dialog" aria-modal onClick={e => e.stopPropagation()}>
-				<div className="ta-center ps-relative card-section">
-					Delete item
-				</div>
-				<div className="ta-center ps-relative card-section">
-					Are you sure that you want to delete the item <strong>"{todoForm.title}"</strong>?
-					<br />
-					This action cannot be undone.
-				</div>
-				<div className="flx-space-between card-section">
-					<button className={'btn btn-black btn-large'} role="button" onClick={modalToggleConfirm}>
-						Cancel
-					</button>
-					<button className={'btn btn-large'} type="button" role="button" name="Confirm" onClick={() => {
-						handleDeleteItem();
-					}}>
-						Confirm
-					</button>
-				</div>
-		</div>
-	</div>
+	return <Modal modalToggle={modalToggleConfirm} maxWidth={'550px'}>
+			<div className="ta-center ps-relative card-section">
+				Delete item
+			</div>
+			<div className="ta-center ps-relative card-section">
+				Are you sure that you want to delete the item <strong>"{todoForm.title}"</strong>?
+				<br />
+				This action cannot be undone.
+			</div>
+			<div className="flx-space-between card-section">
+				<button className={'btn btn-black btn-large'} role="button" onClick={modalToggleConfirm}>
+					Cancel
+				</button>
+				<button className={'btn btn-large'} type="button" role="button" name="Confirm" onClick={() => {
+					handleDeleteItem();
+				}}>
+					Confirm
+				</button>
+			</div>
+		</Modal>
 }
