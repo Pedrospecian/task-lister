@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { TodoStore } from '../interfaces/todo';
 
-const useTodoStore = create()(
+const useTodoStore = create<TodoStore>()(
   persist(
     (set) => ({
       todos: [],
