@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import useModalStore from '../../store/useModalStore'
 import useTodoStore from '../../store/useTodoStore'
 import useTodoFormStore from '../../store/useTodoFormStore'
@@ -49,8 +50,22 @@ export default function ModalItemCreation() {
 		return todoForm.id ? 'Edit' : 'Create'
 	}
 
+	const handleEscKey = (e) => {
+		if (e.key === 'Escape') {
+			modalToggle();
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener('keydown', handleEscKey);
+
+		return () => {
+			document.removeEventListener('keydown', handleEscKey);
+		};
+	}, []);
+
 	return <div className="background">
-		<div className="modal-body">
+		<div className="modal-body" role="dialog" aria-modal>
 			<form onSubmit={(e) => {
 				e.preventDefault();
 			}}>
