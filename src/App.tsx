@@ -85,8 +85,9 @@ function App() {
                 id="search-criterion"
                 label={"Criterion"}
                 className={'input-field'}
+                value={searchCriteria.value}
                 onChange={(e) => {
-                  setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value))!);
+                  setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)) ?? OPTIONS[0]);
                 }}
                 options={OPTIONS}
               />
@@ -94,8 +95,9 @@ function App() {
                 id="search-status"
                 label={"Status"}
                 className={'input-field'}
+                value={searchCompleted.value}
                 onChange={(e) => {
-                  setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value))!);
+                  setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)) ?? COMPLETION_OPTIONS[0]);
                 }}
                 options={COMPLETION_OPTIONS}
               />
