@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const useModalStore = create((set) => ({
+const initialState = {
   modalIsOpen: false,
   modalForm: {
     id: 0,
@@ -8,20 +8,22 @@ const useModalStore = create((set) => ({
     description: '',
     created_at: null,
     completed: false,
+    errors: {
+      title: '',
+      description: '',
+    }
   },
+}
+
+const useModalStore = create((set) => ({
+  ...initialState,
   modalToggle: () =>
     set((state) => ({
       modalIsOpen: !state.modalIsOpen,
     })),
   modalReset: () => 
     set((state) => ({
-      modalForm: {
-        id: 0,
-        title: '',
-        description: '',
-        created_at: null,
-        completed: false,
-      }
+      modalForm: initialState.modalForm
     })),
   modalFormSet: (field, value) =>
     set((state) => ({
@@ -30,9 +32,22 @@ const useModalStore = create((set) => ({
         [field]: value,
       }
     })),
+  modalFormSetError: (field, value) =>
+    set((state) => ({
+      modalForm: {
+        ...state.modalForm,
+        errors: {
+          ...state.modalForm.errors,
+          [field]: value,
+        }
+      }
+    })),
   loadForm: (todo) =>
     set((state) => ({
-      modalForm: todo
+      modalForm: {
+        ...todo,
+        errors: initialState.modalForm.errors
+      }
     }))
 }));
 

@@ -18,7 +18,7 @@ function App() {
   const modalToggle = useModalStore((state) => state.modalToggle);
   const modalReset = useModalStore((state) => state.modalReset);
 
-  const searchFilter = (item) => {
+  const fntSearchFilter = (item) => {
     if (searchValue) {
       if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return false;
@@ -39,11 +39,29 @@ function App() {
     return true;
   }
 
+  const fntRenderItems = () => {
+    if (todos.length < 1) {
+      return 'No items added yet';
+    }
+
+    if (todos.filter(fntSearchFilter).length < 1) {
+      return 'No items match the specified search criteria';
+    }
+
+    return <>
+      {
+        todos.filter(fntSearchFilter).map((item) => {
+          return <Card key={item.id} item={item} />
+        })
+      }
+    </>
+  }
+
   return (
     <>
       {modalIsOpen && <ModalItemCreation />}
-      <header class="header-main">
-        <div class="container">
+      <header className="header-main">
+        <div className="container">
           <h1>Task Lister</h1>
         </div>
       </header>
@@ -87,12 +105,8 @@ function App() {
         </div>
       </section>
       <section>
-        <div class="container cards-container">
-          {todos.length < 1 && 'No items added yet'}
-          {todos.length >= 1 && todos.filter(searchFilter).length < 1 && 'No results for the search criteria'}
-          {todos.filter(searchFilter).map((item) => {
-            return <Card key={item.id} item={item}/>
-          })}
+        <div className="container cards-container">
+          {fntRenderItems()}
         </div>
       </section>
     </>

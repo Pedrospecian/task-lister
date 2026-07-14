@@ -6,12 +6,32 @@ import InputTextarea from '../form/InputTextarea'
 export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, setModalOpen, ...props }) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
 	const modalFormSet = useModalStore((state) => state.modalFormSet);
+	const modalFormSetError = useModalStore((state) => state.modalFormSetError);
 	const modalForm = useModalStore((state) => state.modalForm);
 	const addTodo = useTodoStore((state) => state.addTodo);
 	const editTodo = useTodoStore((state) => state.editTodo);
 
+	const fntFormValid = () => {
+		let isFormValid = true;
+		if (!modalForm.title) {
+			modalFormSetError('title', 'Required field');
+			isFormValid = false;
+		} else {
+			modalFormSetError('title', '');
+		}
+
+		if (!modalForm.description) {
+			modalFormSetError('description', 'Required field');
+			isFormValid = false;
+		} else {
+			modalFormSetError('description', '');
+		}
+
+		return isFormValid;
+	}
+
 	const fntSubmit = () => {
-		if (modalForm.title && modalForm.description) {
+		if (fntFormValid()) {
 			if (modalForm.id) {
 				editTodo(modalForm);
 			} else {
@@ -24,10 +44,14 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 		}
 	}
 
+	const fntGetActionLabel = () => {
+		return modalForm.id ? 'Edit' : 'Create'
+	}
+
 	return <div className="background">
 		<div className="modal-body">
-			<div class="ta-center ps-relative card-section">
-				{modalForm.id ? 'Edit' : 'Create'} item
+			<div className="ta-center ps-relative card-section">
+				{fntGetActionLabel()} item
 			</div>
 			<form className="card-section">
 				<InputText
@@ -38,7 +62,11 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
             		value={modalForm.title}
             		onChange={(e) => {
 						modalFormSet('title', e.target.value);
+						if (e.target.value) {
+							modalFormSetError('title', '');
+						}
 					}}
+					error={modalForm.errors.title}
 				/>
 				<InputTextarea
 					label="Description"
@@ -47,17 +75,21 @@ export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, set
 					value={modalForm.description}
 					onChange={(e) => {
 						modalFormSet('description', e.target.value);
+						if (e.target.value) {
+							modalFormSetError('description', '');
+						}
 					}}
+					error={modalForm.errors.description}
 				/>
 			</form>
-			<div class="flx-space-between card-section">
+			<div className="flx-space-between card-section">
 				<button className={'btn btn-black btn-large'} onClick={modalToggle}>
 					Cancel
 				</button>
 				<button className={'btn btn-large'} onClick={() => {
 					fntSubmit();
 				}}>
-					{modalForm.id ? 'Edit' : 'Create'}
+					{fntGetActionLabel()}
 				</button>
 			</div>
 		</div>

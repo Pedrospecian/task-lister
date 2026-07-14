@@ -81,6 +81,17 @@
   height: 36px;
 }
 
+.input-field.field-error {
+  border: solid 1px #ff5466;
+  outline-color: #ff546688;
+}
+
+.input-error-message {
+  padding-left: 12px;
+  font-size: 14px;
+  color: #ff5466;
+}
+
 .textarea-field {
   resize: vertical;
   height: auto;
