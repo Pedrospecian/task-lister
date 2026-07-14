@@ -70,6 +70,7 @@ function App() {
         <div className="container">
           <div>
             <InputText
+              id="search"
               value={searchValue}
               label={"Search"}
               type={'text'}
@@ -80,6 +81,7 @@ function App() {
             />
             <div className="search-fields-wrapper">
               <SelectField
+                id="search-criterion"
                 label={"Criterion"}
                 className={'input-field'}
                 onChange={(e) => {
@@ -88,6 +90,7 @@ function App() {
                 options={OPTIONS}
               />
               <SelectField
+                id="search-status"
                 label={"Status"}
                 className={'input-field'}
                 onChange={(e) => {
