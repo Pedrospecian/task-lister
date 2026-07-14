@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import useTodoStore from './store/useTodoStore'
 import useTodoFormStore from './store/useTodoFormStore'
 import useModalStore from './store/useModalStore'
@@ -47,25 +47,9 @@ function App() {
     return true;
   }
 
-  const renderItems = () => {
-    if (todos.length < 1) {
-      return 'No items added yet';
-    }
-
-    const todosFiltered = todos.filter(handleSearchFilter);
-
-    if (todosFiltered.length < 1) {
-      return 'No items match the specified search criteria';
-    }
-
-    return <>
-      {
-        todosFiltered.map((item) => {
-          return <Card key={item.id} item={item} />
-        })
-      }
-    </>
-  }
+  const filteredTodos = useMemo(() => {
+    return todos.filter(handleSearchFilter);
+  }, [todos, searchValue, searchCriteria, searchCompleted]);
 
   return (
     <>
@@ -121,8 +105,26 @@ function App() {
         </div>
       </section>
       <section>
-        <div className="container cards-container">
-          {renderItems()}
+        <div
+          className={`container ${
+            filteredTodos.length ? "cards-container" : ""
+          }`}
+        >
+          {!todos.length && (
+            <p>
+              No items added yet
+            </p>
+          )}
+
+          {!!todos.length && !filteredTodos.length && (
+            <p>
+              No items match the specified search criteria
+            </p>
+          )}
+
+          {filteredTodos.map((item) => (
+            <Card key={item.id} item={item} />
+          ))}
         </div>
       </section>
     </>
