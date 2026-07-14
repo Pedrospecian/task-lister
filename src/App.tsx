@@ -7,13 +7,13 @@ import ModalItemCreation from './components/modals/ModalItemCreation'
 import InputText from './components/form/InputText'
 import SelectField from './components/form/SelectField'
 import './App.css'
-import { OPTIONS, COMPLETION_OPTIONS } from './utils/filters'
+import { OPTIONS, COMPLETION_OPTIONS } from './utils/options'
 import type { Todo } from './interfaces/todo';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
-  const [searchCriteria, setSearchCriteria] = useState({value: 1, label: 'Title'});
-  const [searchCompleted, setSearchCompleted] = useState({value: 1, label: 'All'});
+  const [searchCriteria, setSearchCriteria] = useState({value: 'TITLE', label: 'Title'});
+  const [searchCompleted, setSearchCompleted] = useState({value: 'ALL', label: 'All'});
 
   const todos = useTodoStore((state) => state.todos);
   const modalIsOpen = useModalStore((state) => state.modalIsOpen);
@@ -22,19 +22,19 @@ function App() {
 
   const handleSearchFilter = (item: Todo) => {
     if (searchValue) {
-      if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
+      if (searchCriteria.value === 'TITLE' && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return false;
       }
-      if (searchCriteria.value === 2 && !item.description.toLowerCase().includes(searchValue.toLowerCase())) {
+      if (searchCriteria.value === 'DESCRIPTION' && !item.description.toLowerCase().includes(searchValue.toLowerCase())) {
         return false;
       }
     }
 
-    if (searchCompleted.value === 2 && !item.completed) {
+    if (searchCompleted.value === 'COMPLETED' && !item.completed) {
       return false;
     }
 
-    if (searchCompleted.value === 3 && item.completed) {
+    if (searchCompleted.value === 'INCOMPLETE' && item.completed) {
       return false;
     }
 
@@ -89,7 +89,7 @@ function App() {
                 className={'input-field'}
                 value={searchCriteria.value}
                 onChange={(e) => {
-                  setSearchCriteria(OPTIONS.find(item => Number(item.value) === Number(e.target.value)) ?? OPTIONS[0]);
+                  setSearchCriteria(OPTIONS.find(item => item.value === e.target.value) ?? OPTIONS[0]);
                 }}
                 options={OPTIONS}
               />
@@ -99,7 +99,7 @@ function App() {
                 className={'input-field'}
                 value={searchCompleted.value}
                 onChange={(e) => {
-                  setSearchCompleted(COMPLETION_OPTIONS.find(item => Number(item.value) === Number(e.target.value)) ?? COMPLETION_OPTIONS[0]);
+                  setSearchCompleted(COMPLETION_OPTIONS.find(item => item.value === e.target.value) ?? COMPLETION_OPTIONS[0]);
                 }}
                 options={COMPLETION_OPTIONS}
               />
