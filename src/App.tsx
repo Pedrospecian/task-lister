@@ -4,6 +4,7 @@ import useTodoFormStore from './store/useTodoFormStore'
 import useModalStore from './store/useModalStore'
 import Card from './components/Card'
 import ModalItemCreation from './components/modals/ModalItemCreation'
+import ModalDeleteConfirmation from './components/modals/ModalDeleteConfirmation'
 import InputText from './components/form/InputText'
 import SelectField from './components/form/SelectField'
 import './App.css'
@@ -17,6 +18,7 @@ function App() {
 
   const todos = useTodoStore((state) => state.todos);
   const modalIsOpen = useModalStore((state) => state.modalIsOpen);
+  const modalConfirmIsOpen = useModalStore((state) => state.modalConfirmIsOpen);
   const modalToggle = useModalStore((state) => state.modalToggle);
   const formReset = useTodoFormStore((state) => state.formReset);
 
@@ -68,6 +70,7 @@ function App() {
   return (
     <>
       {modalIsOpen && <ModalItemCreation />}
+      {modalConfirmIsOpen && <ModalDeleteConfirmation />}
       <header className="header-main">
         <div className="container">
           <h1>Task Lister</h1>

@@ -11,8 +11,8 @@ interface CardProps {
 
 export default function Card({ item, key }: CardProps) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
+	const modalToggleConfirm = useModalStore((state) => state.modalToggleConfirm);
 	const loadForm = useTodoFormStore((state) => state.loadForm);
-	const deleteTodo = useTodoStore((state) => state.deleteTodo);
 	const toggleTodo = useTodoStore((state) => state.toggleTodo);
 	
 	const handleEditItem = () => {
@@ -21,7 +21,8 @@ export default function Card({ item, key }: CardProps) {
 	}
 
 	const handleDeleteItem = () => {
-		deleteTodo(item.id);
+		loadForm(item);
+		modalToggleConfirm();
 	}
 
 	return (<div>
