@@ -106,16 +106,6 @@
   margin-bottom: 36px;
 }
 
-.card-title {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.card-date {
-  font-size: 12px;
-  color: #999999;
-}
-
 .search-fields-wrapper {
   display: flex;
   width: 100%;
