@@ -1,4 +1,5 @@
 export const OPTIONS = [
+  {value: 'ALL', label: 'All'},
   {value: 'TITLE', label: 'Title'},
   {value: 'DESCRIPTION', label: 'Description'}
 ];

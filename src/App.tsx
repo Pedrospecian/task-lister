@@ -12,7 +12,7 @@ import type { Todo } from './interfaces/todo';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
-  const [searchCriteria, setSearchCriteria] = useState({value: 'TITLE', label: 'Title'});
+  const [searchCriteria, setSearchCriteria] = useState({value: 'ALL', label: 'All'});
   const [searchCompleted, setSearchCompleted] = useState({value: 'ALL', label: 'All'});
 
   const todos = useTodoStore((state) => state.todos);
@@ -26,6 +26,10 @@ function App() {
         return false;
       }
       if (searchCriteria.value === 'DESCRIPTION' && !item.description.toLowerCase().includes(searchValue.toLowerCase())) {
+        return false;
+      }
+
+      if (searchCriteria.value === 'ALL' && !item.title.toLowerCase().includes(searchValue.toLowerCase()) && !item.description.toLowerCase().includes(searchValue.toLowerCase())) {
         return false;
       }
     }
