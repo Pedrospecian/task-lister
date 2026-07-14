@@ -64,10 +64,11 @@ export default function ModalItemCreation() {
 		};
 	}, []);
 
-	return <div className="background">
-		<div className="modal-body" role="dialog" aria-modal>
+	return <div className="background" onClick={modalToggle}>
+		<div className="modal-body" role="dialog" aria-modal onClick={e => e.stopPropagation()}>
 			<form onSubmit={(e) => {
 				e.preventDefault();
+				handleSubmit();
 			}}>
 				<div className="ta-center ps-relative card-section">
 					{getActionLabel()} item
@@ -107,7 +108,7 @@ export default function ModalItemCreation() {
 					<button className={'btn btn-black btn-large'} onClick={modalToggle}>
 						Cancel
 					</button>
-					<button className={'btn btn-large'} onClick={() => {
+					<button className={'btn btn-large'} type="button" onClick={() => {
 						handleSubmit();
 					}}>
 						{getActionLabel()}
