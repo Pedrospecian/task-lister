@@ -10,7 +10,7 @@ const item = {
   id: 1,
   title: 'Fix bug #558',
   description: 'Fix the bug in the contact listing page',
-  created_at: '14/07/2026, 09:36:27',
+  createdAt: '14/07/2026, 09:36:27',
   completed: false,
 }
 
@@ -22,7 +22,7 @@ beforeEach(() => {
       id: 0,
       title: '',
       description: '',
-      created_at: null,
+      createdAt: null,
       completed: false,
       errors: {
         title: '',

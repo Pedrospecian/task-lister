@@ -5,7 +5,7 @@ const initialTodoForm: TodoForm = {
   id: 0,
   title: '',
   description: '',
-  created_at: null,
+  createdAt: null,
   completed: false,
   errors: {
     title: '',

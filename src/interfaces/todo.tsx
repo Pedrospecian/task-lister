@@ -2,7 +2,7 @@ export interface Todo {
   id: number;
   title: string;
   description: string;
-  created_at: string;
+  createdAt: string;
   completed: boolean;
 }
 
@@ -10,7 +10,7 @@ export interface TodoForm {
   id: number;
   title: string;
   description: string;
-  created_at: string | null;
+  createdAt: string | null;
   completed: boolean;
   errors: TodoFormErrors;
 }

@@ -4,7 +4,7 @@ import useTodoFormStore from '../../store/useTodoFormStore'
 import InputText from '../form/InputText'
 import InputTextarea from '../form/InputTextarea'
 
-export default function ModalItemCreation({ modalFormInfo, setModalFormInfo, setModalOpen, ...props }) {
+export default function ModalItemCreation({ ...props }) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
 	const todoFormSet = useTodoFormStore((state) => state.todoFormSet);
 	const todoFormSetError = useTodoFormStore((state) => state.todoFormSetError);

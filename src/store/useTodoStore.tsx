@@ -14,7 +14,7 @@ const useTodoStore = create<TodoStore>()(
               id: Date.now(),
               title: item.title,
               description: item.description,
-              created_at: new Date().toLocaleString("pt-BR"),
+              createdAt: new Date().toLocaleString("pt-BR"),
               completed: false,
             },
           ],

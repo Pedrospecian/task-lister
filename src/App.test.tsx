@@ -14,7 +14,7 @@ beforeEach(() => {
       id: 0,
       title: '',
       description: '',
-      created_at: null,
+      createdAt: null,
       completed: false,
       errors: {
         title: '',
@@ -38,14 +38,14 @@ describe('App', () => {
           title: 'Fix bug #540',
           description: 'Fix the bug in the contact creation page',
           completed: false,
-          created_at: 'now'
+          createdAt: 'now'
         },
         {
           id: 2,
           title: 'Implement facial recognition system',
           description: 'Implement the new facial recognition system, which must reduce the overall proccessing time',
           completed: true,
-          created_at: 'now'
+          createdAt: 'now'
         },
       ],
     })
@@ -63,14 +63,14 @@ describe('App', () => {
           title: 'Fix bug #540',
           description: 'Fix the bug in the contact creation page',
           completed: false,
-          created_at: 'now'
+          createdAt: 'now'
         },
         {
           id: 2,
           title: 'Implement facial recognition system',
           description: 'Implement the new facial recognition system, which must reduce the overall proccessing time',
           completed: false,
-          created_at: 'now'
+          createdAt: 'now'
         },
       ],
     })
@@ -91,7 +91,7 @@ describe('App', () => {
           title: 'Fix bug #540',
           description: 'Fix the bug in the contact creation page',
           completed: false,
-          created_at: 'now'
+          createdAt: 'now'
         }
       ],
     })
@@ -109,7 +109,7 @@ describe('App', () => {
         id: 54,
         title: 'Lingering data',
         description: 'Lingering data from a previously editted todo item',
-        created_at: null,
+        createdAt: null,
         completed: false,
         errors: {
           title: '',

@@ -22,7 +22,7 @@ export default function Card({ item, ...props }) {
 		<div className="card-single">
 			<div className="card-section">
 				<div className="card-title">{item.title}</div>
-				<div className="card-date">Created at {item.created_at}</div>
+				<div className="card-date">Created at {item.createdAt}</div>
 			</div>
 			<div className="card-section">
 				{item.description}
