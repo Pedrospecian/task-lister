@@ -1,24 +1,23 @@
 import { create } from "zustand";
+import type { TodoForm, TodoFormStore } from '../interfaces/todo';
 
-const initialState = {
-  todoForm: {
-    id: 0,
+const initialTodoForm: TodoForm = {
+  id: 0,
+  title: '',
+  description: '',
+  created_at: null,
+  completed: false,
+  errors: {
     title: '',
     description: '',
-    created_at: null,
-    completed: false,
-    errors: {
-      title: '',
-      description: '',
-    }
-  },
+  }
 }
 
-const useTodoFormStore = create((set) => ({
-  ...initialState,
+const useTodoFormStore = create<TodoFormStore>((set) => ({
+  todoForm: initialTodoForm,
   formReset: () => 
-    set((state) => ({
-      todoForm: initialState.todoForm
+    set(() => ({
+      todoForm: initialTodoForm
     })),
   todoFormSet: (field, value) =>
     set((state) => ({
@@ -38,12 +37,12 @@ const useTodoFormStore = create((set) => ({
       }
     })),
   loadForm: (todo) =>
-    set((state) => ({
+    set(() => ({
       todoForm: {
         ...todo,
-        errors: initialState.todoForm.errors
+        errors: initialTodoForm.errors,
       }
-    }))
+    })),
 }));
 
 export default useTodoFormStore;

@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import type { ModalStore } from '../interfaces/modal';
 
-const useModalStore = create((set) => ({
+const useModalStore = create<ModalStore>((set) => ({
   modalIsOpen: false,
   modalToggle: () =>
     set((state) => ({

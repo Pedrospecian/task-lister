@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { TodoStore } from '../interfaces/todo';
+import type { Todo, TodoStore } from '../interfaces/todo';
 
 const useTodoStore = create<TodoStore>()(
   persist(
@@ -22,13 +22,13 @@ const useTodoStore = create<TodoStore>()(
       toggleTodo: (id) =>
         set((state) => ({
           todos: state.todos.map((todo) =>
-            todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+            todo.id === id ? { ...todo, completed: !todo.completed } : todo
           ),
         })),
       editTodo: (item) =>
         set((state) => ({
           todos: state.todos.map((todo) =>
-            todo.id === item.id ? item : todo,
+            todo.id === item.id ? item : todo
           ),
         })),
       deleteTodo: (id) =>
