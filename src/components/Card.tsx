@@ -30,7 +30,9 @@ export default function Card({ item, ...props }) {
 				<div>
 					<InputCheckbox
 						value={item.completed}
-						onChange={toggleTodo}
+						onClick={() => {
+							toggleTodo(item.id);
+						}}
 						id={`done-${item.id}`}
 						label={'Done'}
 					/>

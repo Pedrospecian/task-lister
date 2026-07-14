@@ -38,10 +38,6 @@ const useTodoStore = create()(
         set((state) => {
           localStorage.setItem('todos', state.todos);
         }),
-      loadTodoFromLocalStorage: () =>
-        set((state) => ({
-          todos: JSON.parse(localStorage.getItem('todos')),
-        })),
     }),
     {
       name: "todo-storage",
