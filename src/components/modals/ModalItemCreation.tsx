@@ -12,7 +12,7 @@ export default function ModalItemCreation() {
 	const addTodo = useTodoStore((state) => state.addTodo);
 	const editTodo = useTodoStore((state) => state.editTodo);
 
-	const fntFormValid = () => {
+	const isFormValid = () => {
 		let isFormValid = true;
 		if (!todoForm.title) {
 			todoFormSetError('title', 'Required field');
@@ -31,8 +31,8 @@ export default function ModalItemCreation() {
 		return isFormValid;
 	}
 
-	const fntSubmit = () => {
-		if (fntFormValid()) {
+	const handleSubmit = () => {
+		if (isFormValid()) {
 			if (todoForm.id) {
 				editTodo(todoForm);
 			} else {
@@ -45,56 +45,60 @@ export default function ModalItemCreation() {
 		}
 	}
 
-	const fntGetActionLabel = () => {
+	const getActionLabel = () => {
 		return todoForm.id ? 'Edit' : 'Create'
 	}
 
 	return <div className="background">
 		<div className="modal-body">
-			<div className="ta-center ps-relative card-section">
-				{fntGetActionLabel()} item
-			</div>
-			<form className="card-section">
-				<InputText
-					id="title"
-					label="Title"
-					type="text" 
-            		className={'input-field'}
-            		placeholder="Title"
-            		value={todoForm.title}
-            		onChange={(e) => {
-						todoFormSet('title', e.target.value);
-						if (e.target.value) {
-							todoFormSetError('title', '');
-						}
-					}}
-					error={todoForm.errors.title}
-				/>
-				<InputTextarea
-					id="description"
-					label="Description"
-					placeholder="Description"
-					className={'input-field'}
-					value={todoForm.description}
-					onChange={(e) => {
-						todoFormSet('description', e.target.value);
-						if (e.target.value) {
-							todoFormSetError('description', '');
-						}
-					}}
-					error={todoForm.errors.description}
-				/>
+			<form onSubmit={(e) => {
+				e.preventDefault();
+			}}>
+				<div className="ta-center ps-relative card-section">
+					{getActionLabel()} item
+				</div>
+				<div className="card-section">
+					<InputText
+						id="title"
+						label="Title"
+						type="text" 
+	            		className={'input-field'}
+	            		placeholder="Title"
+	            		value={todoForm.title}
+	            		onChange={(e) => {
+							todoFormSet('title', e.target.value);
+							if (e.target.value) {
+								todoFormSetError('title', '');
+							}
+						}}
+						error={todoForm.errors.title}
+					/>
+					<InputTextarea
+						id="description"
+						label="Description"
+						placeholder="Description"
+						className={'input-field'}
+						value={todoForm.description}
+						onChange={(e) => {
+							todoFormSet('description', e.target.value);
+							if (e.target.value) {
+								todoFormSetError('description', '');
+							}
+						}}
+						error={todoForm.errors.description}
+					/>
+				</div>
+				<div className="flx-space-between card-section">
+					<button className={'btn btn-black btn-large'} onClick={modalToggle}>
+						Cancel
+					</button>
+					<button className={'btn btn-large'} onClick={() => {
+						handleSubmit();
+					}}>
+						{getActionLabel()}
+					</button>
+				</div>
 			</form>
-			<div className="flx-space-between card-section">
-				<button className={'btn btn-black btn-large'} onClick={modalToggle}>
-					Cancel
-				</button>
-				<button className={'btn btn-large'} onClick={() => {
-					fntSubmit();
-				}}>
-					{fntGetActionLabel()}
-				</button>
-			</div>
 		</div>
 	</div>
 }

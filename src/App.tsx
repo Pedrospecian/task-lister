@@ -20,7 +20,7 @@ function App() {
   const modalToggle = useModalStore((state) => state.modalToggle);
   const formReset = useTodoFormStore((state) => state.formReset);
 
-  const fntSearchFilter = (item: Todo) => {
+  const handleSearchFilter = (item: Todo) => {
     if (searchValue) {
       if (searchCriteria.value === 1 && !item.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return false;
@@ -41,18 +41,20 @@ function App() {
     return true;
   }
 
-  const fntRenderItems = () => {
+  const renderItems = () => {
     if (todos.length < 1) {
       return 'No items added yet';
     }
 
-    if (todos.filter(fntSearchFilter).length < 1) {
+    const todosFiltered = todos.filter(handleSearchFilter);
+
+    if (todosFiltered.length < 1) {
       return 'No items match the specified search criteria';
     }
 
     return <>
       {
-        todos.filter(fntSearchFilter).map((item) => {
+        todosFiltered.map((item) => {
           return <Card key={item.id} item={item} />
         })
       }
@@ -113,7 +115,7 @@ function App() {
       </section>
       <section>
         <div className="container cards-container">
-          {fntRenderItems()}
+          {renderItems()}
         </div>
       </section>
     </>
