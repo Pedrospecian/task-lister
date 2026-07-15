@@ -31,6 +31,10 @@ This app was built with React 19, TypeScript, Vite, and Zustand.
 
 ![Filter2](docs/screenshots/filter2.png)
 
+**Confirmation modal before exclusion**
+
+![Filter2](docs/screenshots/delete-confirmation.png)
+
 ## Tech stack
 
 - **React 19** + **TypeScript**: UI
