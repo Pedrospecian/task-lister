@@ -51,7 +51,7 @@ export default function ModalItemCreation() {
 		return todoForm.id ? 'Edit' : 'Create'
 	}
 
-	const handleEscKey = (e) => {
+	const handleEscKey = (e: KeyboardEvent) => {
 		if (e.key === 'Escape') {
 			modalToggle();
 		}

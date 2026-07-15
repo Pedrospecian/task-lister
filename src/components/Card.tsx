@@ -6,10 +6,9 @@ import type { Todo } from '../interfaces/todo';
 
 interface CardProps {
 	item: Todo,
-	key: string | null,
 }
 
-export default function Card({ item, key }: CardProps) {
+export default function Card({ item }: CardProps) {
 	const modalToggle = useModalStore((state) => state.modalToggle);
 	const modalToggleConfirm = useModalStore((state) => state.modalToggleConfirm);
 	const loadForm = useTodoFormStore((state) => state.loadForm);
@@ -26,7 +25,7 @@ export default function Card({ item, key }: CardProps) {
 	}
 
 	return (<div>
-		<div className={`card-single ${item.completed ? 'card-completed' : ''}`} key={key}>
+		<div className={`card-single ${item.completed ? 'card-completed' : ''}`}>
 			<div className="card-section">
 				<div className="card-title">{item.title}</div>
 				<div className="card-date">Created at {item.createdAt}</div>

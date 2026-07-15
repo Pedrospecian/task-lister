@@ -4,7 +4,7 @@ import useTodoStore from '../../store/useTodoStore'
 import useTodoFormStore from '../../store/useTodoFormStore'
 import Modal from './Modal'
 
-export default function ModalItemCreation() {
+export default function ModalDeleteConfirmation() {
 	const modalToggleConfirm = useModalStore((state) => state.modalToggleConfirm);
 	const todoForm = useTodoFormStore((state) => state.todoForm);
 	const deleteTodo = useTodoStore((state) => state.deleteTodo);
@@ -14,7 +14,7 @@ export default function ModalItemCreation() {
 		modalToggleConfirm();
 	}
 
-	const handleEscKey = (e) => {
+	const handleEscKey = (e: KeyboardEvent) => {
 		if (e.key === 'Escape') {
 			modalToggleConfirm();
 		}

@@ -1,14 +1,14 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface ModalProps {
   modalToggle: () => void;
-  maxWidth: string | '700px'
+  maxWidth?: string;
   children: ReactNode;
 }
 
 export default function Modal({
   modalToggle,
-  maxWidth,
+  maxWidth = '700px',
   children,
 }: ModalProps) {
 	return <div className="background" onClick={modalToggle}>
